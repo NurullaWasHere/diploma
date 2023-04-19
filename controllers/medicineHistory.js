@@ -67,7 +67,7 @@ const getAllMedicineHistoryUser = async (req,res) => {
             })
         }
         const histories = await medicineHistory.findAll({where: {
-            user_id:req.params.userId
+            userId:req.params.userId
         }});
         return res.json(
             {

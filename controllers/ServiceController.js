@@ -98,7 +98,7 @@ const deleteService = async (req,res) => {
 const getServicesWithDiscount = async (req,res) => {
     try {
 
-        const services = await BlogModel.findAll({
+        const services = await service.findAll({
             where: {
                 discount: {
                     [Op.gte]: 1
@@ -129,7 +129,7 @@ const updateService = async (req,res) => {
                code: 400
            })
         }   
-        const newService = await BlogModel.update({
+        const newService = await service.update({
             ...params
         }, {
             where: {

@@ -86,7 +86,7 @@ const deleteEmp = async (req,res) => {
     }
 }
 
-const getAllEmployers = async ( _ ,res) => {
+const getAllEmployers = async ( req ,res) => {
     try {
         const employers = await EmployerModel.findAll();
 
@@ -95,7 +95,7 @@ const getAllEmployers = async ( _ ,res) => {
                 message: "В базе данных нет работников"
             })
         }
-        res.json( {
+        return res.json( {
             employers,
             code: 200
         })

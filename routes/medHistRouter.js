@@ -5,7 +5,7 @@ const {
 
 const router = new Router();
 
-router.get('/getAllMedicineHistoryUser', getAllMedicineHistoryUser)
+router.get('/getAllMedicineHistoryUser/:userId', getAllMedicineHistoryUser)
 
 router.post('/createMedicineHistoryToUser', createMedicineHistoryToUser)
 

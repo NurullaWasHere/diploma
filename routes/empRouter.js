@@ -11,7 +11,7 @@ const {
 const router = new Router();
 
 router.get('/getAllEmployers', getAllEmployers)
-router.get('/getEmployer', getEmployer)
+router.get('/getEmployer/:id', getEmployer)
 
 router.post('/createEmp', createEmp)
 router.post('/loginEmp', loginEmp)

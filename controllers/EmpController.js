@@ -95,10 +95,13 @@ const getAllEmployers = async ( _ ,res) => {
                 message: "В базе данных нет работников"
             })
         }
-        res.send(employers)
+        res.json( {
+            employers,
+            code: 200
+        })
     } catch (error) {
         res.json({
-            message:"Ошибка при getAllUsers",
+            message:"Ошибка при getAllEmployers",
             error
         })
     }
@@ -108,7 +111,7 @@ const getEmployer = async (req,res) => {
     try {
         const emp = await EmployerModel.findOne({
             where: {
-                ...req.params
+                id:req.params.id
             }
         })
         if(!emp){

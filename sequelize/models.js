@@ -139,6 +139,10 @@ const medicineHistory = sequelize.define("historymed", {
     description:{
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    med_date: {
+        type: DataTypes.DATE,
+        allowNull: false
     }
 })
 

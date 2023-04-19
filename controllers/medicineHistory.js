@@ -7,7 +7,7 @@ const isExist = require('../utils/isExist')
 
 const createMedicineHistoryToUser  = async (req,res) => {
     try {
-        const {user_id, phone, createdAt, service_id, employerId} = req.body
+        const {user_id, phone, med_date, service_id, employerId} = req.body
         let description = "Запись к "
 
         const isExist = await medicineHistory.findOne({

@@ -124,6 +124,10 @@ const EmployerModel = sequelize.define('employer', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    avatar: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
 })
 
 const medicineHistory = sequelize.define("historymed", {

@@ -163,7 +163,7 @@ const sign = sequelize.define('sign', {
     },
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull:false
+        allowNull:true
     },
     service_id: {
         type: DataTypes.INTEGER,
@@ -171,7 +171,7 @@ const sign = sequelize.define('sign', {
     },
     phone: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     description:{
         type: DataTypes.STRING,

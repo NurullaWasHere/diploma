@@ -44,12 +44,17 @@ const registration = async (req,res) => {
 const loginUser = async (req,res) => {
     try {
         const {phone} = req.body;
+        if(!phone){
+            return res.json({
+                message: "Phone required"
+            })
+        }
         const user = await UserModel.findOne({
             where: {phone}
         })
         
         if(!user){
-            return res.json({message: "Пользватель не найден!"})
+            return res.json({message: "Пользватель не найден!", code: 404})
         }
         if(req.body.password !== user.password){
             return res.json({message: "Неверный пароль"})

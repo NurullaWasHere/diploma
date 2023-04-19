@@ -1,37 +1,48 @@
 const {sign, EmployerModel, UserModel, medicineHistory, service} = require('../sequelize/models')
 const {validationResult} = require('express-validator')
 const isExist = require('../utils/isExist')
+const {Op} = require('sequelize')
 
 
 
 
-const signToService  = async (req,res) => {
+
+
+const createSignToService = async (req,res) => {
     try {
-        const {service_id} = req.body;
-        const {user_id, phone} = req.user
-
-        const signExist = await sign.findOne({
+        const {service_id, signDate} = req.body;
+        const emp = await service.findOne({
             where: {
-                user_id,
-                service_id
+                id: service_id
             }
         })
 
+        if(!emp){
+            return res.json({
+                message: "service doesn't exist",
+                code: 400
+            })
+        }
+        const signExist = await sign.findOne({
+            where: {
+                service_id,
+                signDate: signDate
+            }
+        })
         if(signExist){
             return res.json({
                 message: "Sign already signed",
                 code:400
             })
         }
-        const newSign = await sign.create({
+        const newSign =  await sign.create({
+            signDate,
             description: req.body.description,
-            service_id,
-            user_id,
-            phone
+            service_id
         })
 
         return res.json({
-            message: "question created!",
+            message: "sign created!",
             code: 200,
             newSign
         })
@@ -41,10 +52,63 @@ const signToService  = async (req,res) => {
 }
 
 
-const signToDoctor = async (req,res) => {
+const getSignsOfService = async (req,res) => {
     try {
-        const {employerId} = req.body;
-        const {user_id,phone} = req.user
+        const {service_id} = req.body;
+        if(!service_id){
+            return res.json({
+                message: "service id required",
+                code: 400
+            })
+        }
+
+        const signs = await sign.findAll( {
+            where: {
+                service_id,
+                user_id: {
+                    [Op.not]: null
+                }
+            }
+        })
+
+        return res.json( {
+            signs
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+const getEmptySignsOfService = async (req,res) => {
+    try {
+        const {service_id} = req.body;
+
+        if(!service_id){
+            return res.json({
+                message: "service_id required",
+                code: 400
+            })
+        }
+        const signs = await sign.findAll( {
+            where: {
+                service_id,
+                user_id: null
+            }
+        })
+
+        return res.json( {
+            signs
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+const createSignToDoctor = async (req,res) => {
+    try {
+        const {employerId, signDate} = req.body;
         const emp = await EmployerModel.findOne({
             where: {
                 id: employerId
@@ -59,8 +123,8 @@ const signToDoctor = async (req,res) => {
         }
         const signExist = await sign.findOne({
             where: {
-                user_id,
-                employerId
+                employerId,
+                signDate: signDate
             }
         })
         if(signExist){
@@ -70,13 +134,12 @@ const signToDoctor = async (req,res) => {
             })
         }
         const newSign = await emp.addSign( await sign.create({
-            user_id,
-            description: req.body.description,
-            phone
+            signDate,
+            description: req.body.description
         }))
 
         return res.json({
-            message: "question created!",
+            message: "sign created!",
             code: 200,
             newSign
         })
@@ -85,6 +148,91 @@ const signToDoctor = async (req,res) => {
     }    
 }
 
+const signToExistingDate = async (req,res) => {
+    try {
+        const {id} = req.body;
+        const isExist = await sign.findOne( {
+            where: {
+                id
+            }
+        })
+        if(!isExist){
+            return res.json( {
+                message: "sign doesn't exist",
+                code: 400
+            })
+        }
+        const user_id = req.user.id;
+        const updated = await sign.update( {
+            user_id
+        },
+        {
+            where: {
+                id
+            }
+        })
+        return res.json({
+            message: "sign updated!",
+            code: 200,
+            updated
+        })
+}
+catch (error) {
+    console.log(error)
+}
+}
+
+const getSignsOfEmployer = async (req,res) => {
+    try{
+        const {employerId} = req.body;
+        if(!employerId){
+            return res.json({
+                message: "employerId required",
+                code: 400
+            })
+        }
+
+        const signs = await sign.findAll( {
+            where: {
+                employerId,
+                user_id: {
+                    [Op.not]: null
+                }
+            }
+        })
+
+        return res.json( {
+            signs
+        })
+    }catch (error) {
+        console.log(error)
+    }
+}
+
+const getEmptySignsOfEmployer = async (req,res) => {
+    try {
+        const {employerId} = req.body;
+
+        if(!employerId){
+            return res.json({
+                message: "employerId required",
+                code: 400
+            })
+        }
+        const signs = await sign.findAll( {
+            where: {
+                employerId,
+                user_id: null
+            }
+        })
+
+        return res.json( {
+            signs
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 const signByPhone = async( req,res ) => {
     try {
@@ -222,5 +370,5 @@ const signsByService = async (req,res) => {
 
 
 module.exports = {
-    signsByDoctor, deleteSign, signToService, signToDoctor, signByPhone, signsByService
+    getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
 }

@@ -368,10 +368,7 @@ const signsByService = async (req,res) => {
 const getSignByDate = async (req,res) => {
     try {
         const date = req.params.date
-
-        const signsInDate = await sign.findAll({where: {
-        
-        }})
+        const signsInDate = await sign.findAll()
 
     } catch (error) {
         console.log(error)

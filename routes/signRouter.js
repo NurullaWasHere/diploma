@@ -8,7 +8,7 @@ const router = new Router();
 
 router.get('/signsByDoctor', signsByDoctor)
 router.get('/signsByService', signsByService)
-router.get('/getEmptySignsOfService', getEmptySignsOfService)
+router.get('/getEmptySignsOfService/:employerId/:date?', getEmptySignsOfService)
 router.get('/getSignsOfService', getSignsOfService)
 router.get('/getEmptySignsOfService', getEmptySignsOfEmployer)
 router.get('/getSignsOfService', getSignsOfEmployer)

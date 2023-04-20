@@ -208,7 +208,8 @@ const getSignsOfEmployer = async (req,res) => {
 
 const getEmptySignsOfEmployer = async (req,res) => {
     try {
-        const {employerId} = req.body;
+        const {employerId, date} = req.params;
+
 
         if(!employerId){
             return res.json({
@@ -216,15 +217,17 @@ const getEmptySignsOfEmployer = async (req,res) => {
                 code: 400
             })
         }
-        const signs = await sign.findAll( {
+        const findSigns = await sign.findAll( {
             where: {
                 employerId,
                 user_id: null
             }
         })
 
+        console.log(findSigns)
+
         return res.json( {
-            signs
+            findSigns
         })
     } catch (error) {
         console.log(error)
@@ -369,6 +372,7 @@ const getSignByDate = async (req,res) => {
     try {
         const date = req.params.date
         const signsInDate = await sign.findAll()
+    
 
     } catch (error) {
         console.log(error)

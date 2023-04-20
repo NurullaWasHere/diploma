@@ -10,7 +10,7 @@ router.get('/signsByDoctor', signsByDoctor)
 router.get('/signsByService', signsByService)
 router.get('/getEmptySignsOfService/', getEmptySignsOfService)
 router.get('/getSignsOfService', getSignsOfService)
-router.get('/getEmptySignsOfEmployer/:employerId/:date?', getEmptySignsOfEmployer)
+router.post('/getEmptySignsOfEmployer/', getEmptySignsOfEmployer)
 router.get('/getSignsOfService', getSignsOfEmployer)
 
 router.post('/signToExistingDate',authMiddleware,signToExistingDate)

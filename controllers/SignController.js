@@ -208,7 +208,7 @@ const getSignsOfEmployer = async (req,res) => {
 
 const getEmptySignsOfEmployer = async (req,res) => {
     try {
-        const {employerId, date} = req.params;
+        const {employerId, date} = req.body;
 
 
         if(!employerId){

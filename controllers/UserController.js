@@ -46,11 +46,11 @@ const loginUser = async (req,res) => {
         const {IIN} = req.body;
         if(!IIN){
             return res.json({
-                message: "Phone required"
+                message: "IIN required"
             })
         }
         const user = await UserModel.findOne({
-            where: {IIN}
+            where: {iin: IIN}
         })
         
         if(!user){

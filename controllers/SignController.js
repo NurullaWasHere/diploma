@@ -365,6 +365,19 @@ const signsByService = async (req,res) => {
     }
 }
 
+const getSignByDate = async (req,res) => {
+    try {
+        const date = req.params.date
+
+        const signsInDate = await sign.findAll({where: {
+        
+        }})
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 module.exports = {
     getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService

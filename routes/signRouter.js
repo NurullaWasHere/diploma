@@ -8,9 +8,9 @@ const router = new Router();
 
 router.get('/signsByDoctor', signsByDoctor)
 router.get('/signsByService', signsByService)
-router.get('/getEmptySignsOfService/:employerId/:date?', getEmptySignsOfService)
+router.get('/getEmptySignsOfService/', getEmptySignsOfService)
 router.get('/getSignsOfService', getSignsOfService)
-router.get('/getEmptySignsOfService', getEmptySignsOfEmployer)
+router.get('/getEmptySignsOfEmployer/:employerId/:date?', getEmptySignsOfEmployer)
 router.get('/getSignsOfService', getSignsOfEmployer)
 
 router.post('/signToExistingDate',authMiddleware,signToExistingDate)

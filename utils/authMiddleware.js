@@ -6,7 +6,7 @@ module.exports = function(req,res ,next){
         next();
     }
     try {
-        let token = req.headers.authorization.split(' ')[0];
+        let token = req.headers.authorization;
         token = token.replace(/"/g, '');
         if (!token){
             return res.json({

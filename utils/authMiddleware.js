@@ -6,7 +6,8 @@ module.exports = function(req,res ,next){
         next();
     }
     try {
-        const token = req.headers.authorization;
+        let token = req.headers.authorization.split(' ')[0];
+        token = token.replace(/"/g, '');
         if (!token){
             return res.json({
                 message:"User not logged",

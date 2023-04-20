@@ -5,9 +5,6 @@ const {Op} = require('sequelize')
 
 
 
-
-
-
 const createSignToService = async (req,res) => {
     try {
         const {service_id, signDate} = req.body;

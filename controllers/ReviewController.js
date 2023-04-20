@@ -5,6 +5,15 @@ const isExist = require('../utils/isExist')
 
 // validation, question-solution one-to-many
 
+const reviewOfBlog = async (req,res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 const createReviewToBlog  = async (req,res) => {
     try {
         const {blogId} = req.body;

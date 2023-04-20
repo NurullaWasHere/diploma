@@ -8,7 +8,7 @@ const authMiddleware = require('../utils/authMiddleware')
 const router = new Router();
 
 router.get('/getAllBlogs', getAllBlogs)
-router.get('/getBlogByParams', getBlogByParams)
+router.get('/getBlogByParams/:id', getBlogByParams)
 
 router.post('/createBlog',authMiddleware,createBlog)
 

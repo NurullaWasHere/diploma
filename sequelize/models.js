@@ -54,13 +54,18 @@ const UserModel = sequelize.define('user', {
     },
     phone: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         unique: true
     },
     location: {
         type: DataTypes.STRING,
         allowNull: true
     },
+    IIN: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    }
 })
 
 const BlogModel = sequelize.define('blog', {
@@ -241,6 +246,10 @@ const service = sequelize.define('service', {
     discount: {
         type:DataTypes.INTEGER,
         allowNull:true
+    },
+    service_image: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 })
 

@@ -18,8 +18,9 @@ const registration = async (req,res) => {
             })
         }
 
-        const {IIN} = req.body;
-        const isExist = await UserModel.findOne({where: {iin: IIN}})
+        let {IIN} = req.body;
+        IIN = IIN.replace(/\s/g, '');
+        const isExist = await UserModel.findOne({where: {IIN: IIN}})
         if(isExist){
             return res.json({
                 message: "Пользватель уже существует"
@@ -43,14 +44,15 @@ const registration = async (req,res) => {
 
 const loginUser = async (req,res) => {
     try {
-        const {IIN} = req.body;
+        let {IIN} = req.body;
+        IIN = IIN.replace(/\s/g, '');
         if(!IIN){
             return res.json({
                 message: "IIN required"
             })
         }
         const user = await UserModel.findOne({
-            where: {iin: IIN}
+            where: {IIN: IIN}
         })
         
         if(!user){

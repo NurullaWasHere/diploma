@@ -224,7 +224,7 @@ const getEmptySignsOfEmployer = async (req,res) => {
             },
             attributes: [
                 'id', 
-                [fn('FORMAT', col("signDate"), 'mm.dd.yyyy'), 'col_name']
+                [fn('FORMAT', col("signDate"), 'mm.dd.yyyy'), 'signDate']
             ]
         })
         const sample = findSigns[0].signDate.toLocaleDateString()

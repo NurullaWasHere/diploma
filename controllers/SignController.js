@@ -223,11 +223,11 @@ const getEmptySignsOfEmployer = async (req,res) => {
                 user_id: null
             }
         })
-        console.log(findSigns[0].signDate.toLocaleDateString());
-
-        const signs = findSigns.filter( el => el.signDate.toLocaleDateString() === date)
+        const sample = findSigns[0].signDate.toLocaleDateString()
+        const signs = findSigns.filter( el => el.signDate.toLocaleDateString() == date)
         return res.json( {
-            signs
+            signs,
+            sample
         })
     } catch (error) {
         console.log(error)

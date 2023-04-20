@@ -220,7 +220,9 @@ const getEmptySignsOfEmployer = async (req,res) => {
         const findSigns = await sign.findAll( {
             where: {
                 employerId,
-                user_id: null
+                user_id: {
+                    $eq: null
+                }
             },
         })
         const sample = findSigns[0].signDate.toLocaleDateString()

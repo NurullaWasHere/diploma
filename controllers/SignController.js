@@ -1,7 +1,7 @@
 const {sign, EmployerModel, UserModel, medicineHistory, service} = require('../sequelize/models')
 const {validationResult} = require('express-validator')
 const isExist = require('../utils/isExist')
-const {Op, fn, Sequelize, col} = require('sequelize')
+const {Op} = require('sequelize')
 
 
 
@@ -222,17 +222,12 @@ const getEmptySignsOfEmployer = async (req,res) => {
                 employerId,
                 user_id: null
             },
-            attributes: [
-                'id', 
-                [fn('FORMAT', col("signDate"), 'mm.dd.yyyy'), 'signDate']
-            ]
         })
         const sample = findSigns[0].signDate.toLocaleDateString()
         const signs = findSigns.filter( el => el.signDate.toLocaleDateString() == date)
         return res.json( {
             signs,
-            sample,
-            findSigns
+            sample
         })
     } catch (error) {
         console.log(error)

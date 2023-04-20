@@ -19,7 +19,7 @@ const registration = async (req,res) => {
         }
 
         const {IIN} = req.body;
-        const isExist = await UserModel.findOne({where: {iin: IIN}})
+        const isExist = await UserModel.findOne({where: {IIN: IIN}})
         if(isExist){
             return res.json({
                 message: "Пользватель уже существует"
@@ -50,7 +50,7 @@ const loginUser = async (req,res) => {
             })
         }
         const user = await UserModel.findOne({
-            where: {iin: IIN}
+            where: {IIN: IIN}
         })
         
         if(!user){

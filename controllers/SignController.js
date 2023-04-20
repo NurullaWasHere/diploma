@@ -1,7 +1,7 @@
 const {sign, EmployerModel, UserModel, medicineHistory, service} = require('../sequelize/models')
 const {validationResult} = require('express-validator')
 const isExist = require('../utils/isExist')
-const {Op, fn, Sequelize} = require('sequelize')
+const {Op, fn, Sequelize, col} = require('sequelize')
 
 
 

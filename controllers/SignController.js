@@ -209,7 +209,7 @@ const getSignsOfEmployer = async (req,res) => {
 
 const getAllSignsEmployer = async (req,res) => {
     try{
-        const {employerId} = req.body;
+        const {employerId} = req.params;
         if(!employerId){
             return res.json({
                 message: "employerId required",
@@ -226,8 +226,12 @@ const getAllSignsEmployer = async (req,res) => {
             }
         })
 
+        const filteredSigns = signs.map ( el =>  {
+            return el.signDate.toLocaleDateString()
+        })
+
         return res.json( {
-            signs
+            filteredSigns
         })
     }catch (error) {
         console.log(error)

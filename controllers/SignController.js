@@ -206,6 +206,36 @@ const getSignsOfEmployer = async (req,res) => {
     }
 }
 
+
+const getAllSignsEmployer = async (req,res) => {
+    try{
+        const {employerId} = req.body;
+        if(!employerId){
+            return res.json({
+                message: "employerId required",
+                code: 400
+            })
+        }
+
+        const signs = await sign.findAll( {
+            where: {
+                employerId,
+                user_id: {
+                    [Op.eq] : null
+                }
+            }
+        })
+
+        return res.json( {
+            signs
+        })
+    }catch (error) {
+        console.log(error)
+    }
+}
+
+
+
 const getEmptySignsOfEmployer = async (req,res) => {
     try {
         const {employerId, date} = req.body;
@@ -221,7 +251,7 @@ const getEmptySignsOfEmployer = async (req,res) => {
             where: {
                 employerId,
                 user_id: {
-                    $eq: null
+                    [Op.eq] : null
                 }
             },
         })
@@ -383,5 +413,5 @@ const getSignByDate = async (req,res) => {
 
 
 module.exports = {
-    getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
+    getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
 }

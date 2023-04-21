@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const {    
-    getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
+    getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
 } = require('../controllers/SignController');
 const authMiddleware = require('../utils/authMiddleware');
 
@@ -10,6 +10,8 @@ router.get('/signsByDoctor', signsByDoctor)
 router.get('/signsByService', signsByService)
 router.get('/getEmptySignsOfService/', getEmptySignsOfService)
 router.get('/getSignsOfService', getSignsOfService)
+router.get('/getAllSignsEmployer/:id', getAllSignsEmployer)
+
 router.post('/getEmptySignsOfEmployer/', getEmptySignsOfEmployer)
 router.get('/getSignsOfService', getSignsOfEmployer)
 

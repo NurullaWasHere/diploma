@@ -80,12 +80,16 @@ const BlogModel = sequelize.define('blog', {
         unique: true
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
     },
     author_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
+    },
+    author_name: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 })
 

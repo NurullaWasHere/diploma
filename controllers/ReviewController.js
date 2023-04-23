@@ -18,7 +18,10 @@ const getReviewOfBlog = async (req,res) => {
         const reviews = await review.findAll( {
             where: {
                 blogId
-            }
+            },
+            order: [
+                ['createdAt', 'DESC']
+            ]
         })
 
         return res.json({

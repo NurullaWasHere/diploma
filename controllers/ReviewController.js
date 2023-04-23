@@ -60,9 +60,9 @@ const getReviewOfEmployer = async (req,res) => {
 
 const createReviewToBlog  = async (req,res) => {
     try {
-        const {blogId} = req.body;
+        const {blogId, author_id} = req.body;
 
-        const author_id = req.user.id
+        // const author_id = req.user.id
 
         const isExist = await BlogModel.findOne({
             where: {
@@ -100,9 +100,9 @@ const createReviewToBlog  = async (req,res) => {
 
 const createReviewToEmployer  = async (req,res) => {
     try {
-        const {employerId} = req.body;
+        const {employerId, author_id} = req.body;
 
-        const author_id = req.user.id
+        // const author_id = req.user.id
 
 
         const isExist = await EmployerModel.findOne({

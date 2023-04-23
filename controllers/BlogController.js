@@ -94,7 +94,7 @@ const deleteBlog = async (req,res) => {
 
 const getBlogByParams = async (req,res) => {
     try {
-        const {params} = req.body
+        const {id} = req.params
         if(!id) {
            return res.json({
                message: "id required", 
@@ -102,7 +102,7 @@ const getBlogByParams = async (req,res) => {
            })
         }
         const blog = await BlogModel.findOne({
-            where: params
+            where: {id}
         })
         if(!blog){
             return res.json({

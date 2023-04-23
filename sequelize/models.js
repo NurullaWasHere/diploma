@@ -230,6 +230,10 @@ const review = sequelize.define('review', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    fullname: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
 })
 
 const service = sequelize.define('service', {

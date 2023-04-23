@@ -1,4 +1,4 @@
-const {questions, BlogModel, review, EmployerModel} = require('../sequelize/models')
+const {questions, BlogModel, review, EmployerModel, UserModel} = require('../sequelize/models')
 const {validationResult} = require('express-validator')
 const isExist = require('../utils/isExist')
 
@@ -82,11 +82,28 @@ const createReviewToBlog  = async (req,res) => {
                 id: blogId
             }
         })
+
+        const user = await UserModel.findOne({
+            where: {
+                id: author_id
+            }
+        })
+
+        if(!user){
+            return res.json({
+                message: "user not found"
+            })
+        }
+
+        const fullname = user.firstname + ' ' + user.lastname;
+
         const newReview = await review.create({
             author_id,
             description: req.body.description,
-            blogId
+            blogId,
+            fullname
         })
+
 
         await blog.addReview(newReview).then( () => {
             return res.json({

@@ -22,7 +22,7 @@ const getReviewOfBlog = async (req,res) => {
         })
 
         return res.json({
-            blogs
+            reviews
         })
 
 

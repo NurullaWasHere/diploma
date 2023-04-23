@@ -66,7 +66,7 @@ const createReviewToBlog  = async (req,res) => {
 
         const isExist = await BlogModel.findOne({
             where: {
-                blogId
+                id: blogId
             }
         })
 
@@ -84,7 +84,8 @@ const createReviewToBlog  = async (req,res) => {
         })
         const newReview = await review.create({
             author_id,
-            description: req.body.description
+            description: req.body.description,
+            blogId
         })
 
         await blog.addReview(newReview).then( () => {

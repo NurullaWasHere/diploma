@@ -79,7 +79,7 @@ const getSignsOfService = async (req,res) => {
 
 const getEmptySignsOfService = async (req,res) => {
     try {
-        const {service_id} = req.body;
+        const {service_id, date} = req.body;
 
         if(!service_id){
             return res.json({
@@ -87,15 +87,19 @@ const getEmptySignsOfService = async (req,res) => {
                 code: 400
             })
         }
-        const signs = await sign.findAll( {
+        const findSigns = await sign.findAll( {
             where: {
                 service_id,
-                user_id: null
-            }
+                user_id: {
+                    [Op.eq] : null
+                }
+            },
         })
-
+        const sample = findSigns[0].signDate.toLocaleDateString()
+        const signs = findSigns.filter( el => el.signDate.toLocaleDateString() == date)
         return res.json( {
-            signs
+            signs,
+            sample
         })
     } catch (error) {
         console.log(error)

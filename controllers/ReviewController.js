@@ -15,7 +15,7 @@ const getReviewOfBlog = async (req,res) => {
                 code:400
             })
         }
-        const blogs = await BlogModel.findAll( {
+        const reviews = await review.findAll( {
             where: {
                 blogId
             }

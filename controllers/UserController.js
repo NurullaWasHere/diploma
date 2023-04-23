@@ -114,9 +114,36 @@ const getAllUsers = async ( _ ,res) => {
     }
 }
 
+const getUser = async (req,res) => {
+    try {
+        const {id} = req.params
+        if(!id){
+            return res.json({
+                message: "id required"
+            })
+        }
+
+        const user = await UserModel.findOne({
+            where: {id}
+        })
+        if(!user){
+            return res.json({
+                message: "user doesn't exist"
+            })
+        }
+
+        return res.json({
+            user
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     loginUser, 
     registration,
     deleteUser,
-    getAllUsers
+    getAllUsers,
+    getUser
 }

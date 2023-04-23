@@ -5,9 +5,53 @@ const isExist = require('../utils/isExist')
 
 // validation, question-solution one-to-many
 
-const reviewOfBlog = async (req,res) => {
+const getReviewOfBlog = async (req,res) => {
     try {
-        
+        const { blogId } = req.params
+
+        if(!blogId){
+            return res.json({
+                message: "id required",
+                code:400
+            })
+        }
+        const blogs = await BlogModel.findAll( {
+            where: {
+                blogId
+            }
+        })
+
+        return res.json({
+            blogs
+        })
+
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const getReviewOfEmployer = async (req,res) => {
+    try {
+        const { employerId } = req.params
+
+        if(!blogId){
+            return res.json({
+                message: "id required",
+                code:400
+            })
+        }
+        const blogs = await BlogModel.findAll( {
+            where: {
+                employerId
+            }
+        })
+
+        return res.json({
+            blogs
+        })
+
+
     } catch (error) {
         console.log(error)
     }
@@ -171,5 +215,5 @@ const updateReview = async (req,res) => {
 }
 
 module.exports = {
-    createReviewToBlog, createReviewToEmployer, deleteReview, updateReview
+    createReviewToBlog, createReviewToEmployer, deleteReview, updateReview, getReviewOfEmployer, getReviewOfBlog
 }

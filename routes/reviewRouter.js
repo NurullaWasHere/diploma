@@ -1,9 +1,12 @@
 const {Router} = require('express')
 const {    
-    createReviewToBlog, createReviewToEmployer, deleteReview, updateReview
+    createReviewToBlog, createReviewToEmployer, deleteReview, updateReview, getReviewOfBlog, getReviewOfEmployer
 } = require('../controllers/ReviewController')
 
 const router = new Router();
+
+router.get('/getReviewOfBlog/:blogId', getReviewOfBlog)
+router.get('/getReviewOfEmployer/:employerId', getReviewOfEmployer)
 
 
 router.post('/createReviewToBlog', createReviewToBlog)

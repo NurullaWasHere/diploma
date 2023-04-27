@@ -19,7 +19,7 @@ const getService = async (req,res) => {
         })
 
 
-        if(!service){
+        if(!ss){
             return res.json({
                 message: "service doesn't exist"
             })

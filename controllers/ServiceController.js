@@ -14,9 +14,11 @@ const getService = async (req,res) => {
             })
         }
 
-        const service = await service.findOne({
+        const ss = await service.findOne({
             where: {id}
         })
+
+
         if(!service){
             return res.json({
                 message: "service doesn't exist"
@@ -24,7 +26,7 @@ const getService = async (req,res) => {
         }
 
         return res.json({
-            service
+            ss
         })
     } catch (error) {
         console.log(error)

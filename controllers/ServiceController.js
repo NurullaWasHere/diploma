@@ -1,4 +1,4 @@
-const {questions, BlogModel, service, service} = require('../sequelize/models')
+const {questions, BlogModel,  service} = require('../sequelize/models')
 const {validationResult, param} = require('express-validator')
 const {Op} = require('sequelize')
 

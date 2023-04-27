@@ -1,9 +1,37 @@
-const {questions, BlogModel, service} = require('../sequelize/models')
+const {questions, BlogModel, service, service} = require('../sequelize/models')
 const {validationResult, param} = require('express-validator')
 const {Op} = require('sequelize')
 
 
 // validation, question-solution one-to-many
+
+const getService = async (req,res) => {
+    try {
+        const {id} = req.params
+        if(!id){
+            return res.json({
+                message: "id required"
+            })
+        }
+
+        const service = await service.findOne({
+            where: {id}
+        })
+        if(!service){
+            return res.json({
+                message: "service doesn't exist"
+            })
+        }
+
+        return res.json({
+            service
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 
 const createService  = async (req,res) => {
     try {
@@ -147,5 +175,5 @@ const updateService = async (req,res) => {
 }
 
 module.exports = {
-    updateService, getServicesWithDiscount, deleteService, getAllService, createService
+    updateService, getServicesWithDiscount, deleteService, getAllService, createService, getService
 }

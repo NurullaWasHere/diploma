@@ -1,7 +1,7 @@
 const {sign, EmployerModel, UserModel, medicineHistory, service} = require('../sequelize/models')
 const {validationResult} = require('express-validator')
 const isExist = require('../utils/isExist')
-const {Op} = require('sequelize')
+const {Op, fn, col} = require('sequelize')
 
 
 
@@ -46,6 +46,22 @@ const createSignToService = async (req,res) => {
     } catch (error) {
         console.log(error)
     }    
+}
+
+const getSignsSortedByDate = async (req,res) => {
+    try {
+        const result = await sign.findAll({
+            attributes: ['sign_date', [fn('array_agg', col('user_id')), 'user_ids']],
+            group: ['sign_date']
+        })
+
+        return res.json({
+            result
+        })
+    
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 
@@ -420,5 +436,5 @@ const getSignByDate = async (req,res) => {
 
 
 module.exports = {
-    getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
+    getSignsSortedByDate, getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
 }

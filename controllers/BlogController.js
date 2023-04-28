@@ -7,7 +7,6 @@ const {validationResult, param} = require('express-validator')
 const createBlog  = async (req,res) => {
     try {
         const params = req.body
-        params.author_id = req.user.id
         const {name} = params
 
         const isExist = await BlogModel.findOne({where: {name}})

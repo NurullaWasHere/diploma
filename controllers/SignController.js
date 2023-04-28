@@ -55,7 +55,7 @@ const getSignsSortedByDate = async (req,res) => {
                 [fn('DATE', col('signDate')), 'signDate'], 
                 [fn('array_agg', col('user_id')), 'user_ids']
             ],
-            group: ['signDate']
+            group: [fn('DATE', col('signDate'))]
         })
 
         return res.json({

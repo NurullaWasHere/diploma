@@ -52,7 +52,7 @@ const getSignsSortedByDate = async (req,res) => {
     try {
         const result = await sign.findAll({
             attributes: [
-                [fn('DATE_TRUNC', 'day', sequelize.col('sign_date')), 'sign_day'], 
+                [fn('DATE_TRUNC', 'day', sequelize.col('signDate')), 'signDate'], 
                 [fn('array_agg', col('user_id')), 'user_ids']
             ],
             group: ['signDate']

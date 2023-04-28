@@ -51,8 +51,8 @@ const createSignToService = async (req,res) => {
 const getSignsSortedByDate = async (req,res) => {
     try {
         const result = await sign.findAll({
-            attributes: ['sign_date', [fn('array_agg', col('user_id')), 'user_ids']],
-            group: ['sign_date']
+            attributes: ['signDate', [fn('array_agg', col('user_id')), 'user_ids']],
+            group: ['signDate']
         })
 
         return res.json({

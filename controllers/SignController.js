@@ -50,12 +50,19 @@ const createSignToService = async (req,res) => {
 
 const getSignsSortedByDate = async (req,res) => {
     try {
+        const tzOffset = '+03:00'
+        const {page} = req.params
+        const limit = 1
+        const offset = (page - 1) * limit;
         const result = await sign.findAll({
             attributes: [
                 [fn('DATE', col('signDate')), 'signDate'], 
-                [fn('array_agg', fn('json_build_object', 'signDate', col('signDate'), 'user_id', col('user_id'))), 'user_ids']
+                [fn('array_agg', fn('json_build_object', 'signDate', literal(`("sign"."signDate" AT TIME ZONE 'UTC' AT TIME ZONE '${tzOffset}')`), 'user_id', col('user_id'))), 'user_ids']
             ],
-            group: [fn('DATE', col('signDate'))]
+            group: [fn('DATE', col('signDate'))],
+            order: [col('signDate')],
+            limit: limit,
+            offset: offset
         })
 
         return res.json({

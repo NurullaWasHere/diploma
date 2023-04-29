@@ -10,7 +10,7 @@ router.get('/signsByDoctor', signsByDoctor)
 router.get('/signsByService', signsByService)
 router.get('/getSignsOfService', getSignsOfService)
 router.get('/getAllSignsEmployer/:id', getAllSignsEmployer)
-router.get('/getSignsSortedByDate', getSignsSortedByDate)
+router.get('/getSignsSortedByDate/:page?', getSignsSortedByDate)
 
 router.post('/getEmptySignsOfEmployer', getEmptySignsOfEmployer)
 router.post('/getEmptySignsOfService', getEmptySignsOfService)

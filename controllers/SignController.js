@@ -53,7 +53,7 @@ const getSignsSortedByDate = async (req,res) => {
         const result = await sign.findAll({
             attributes: [
                 [fn('DATE', col('signDate')), 'signDate'], 
-                [fn('array_agg', col('user_id'), col('signDate')), 'user_ids']
+                [fn('array_agg', fn('ROW', col('signDate'), col('user_id'))), 'user_ids']
             ],
             group: [fn('DATE', col('signDate'))]
         })

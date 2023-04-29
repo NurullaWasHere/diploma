@@ -57,7 +57,7 @@ const getSignsSortedByDate = async (req,res) => {
         const result = await sign.findAll({
             attributes: [
                 [fn('DATE', col('signDate')), 'signDate'], 
-                [fn('array_agg', fn('json_build_object', 'signDate', literal(`("sign"."signDate" AT TIME ZONE 'UTC' AT TIME ZONE '${tzOffset}')`), 'user_id', col('user_id'), 'phone', col('phone'))), 'user_ids']
+                [fn('array_agg', fn('json_build_object', 'signDate', literal(`("sign"."signDate" AT TIME ZONE 'UTC' AT TIME ZONE '${tzOffset}')`), 'user_id', col('user_id'), 'phone', col('phone'), 'fullname', col('fullname'))), 'user_ids']
             ],
             group: [fn('DATE', col('signDate'))],
             order: [col('signDate')],
@@ -204,6 +204,7 @@ const signToExistingDate = async (req,res) => {
             })
         }
         const user_id = req.user.id;
+        const fullname = user_id.firstname + " " + user.id.lastname
         const user = await UserModel.findOne({
             where: {
                 id: user_id
@@ -211,7 +212,8 @@ const signToExistingDate = async (req,res) => {
         })
         const updated = await sign.update( {
             user_id,
-            phone: user.phone
+            phone: user.phone,
+            fullname
         },
         {
             where: {

@@ -74,6 +74,19 @@ const getSignsSortedByDate = async (req,res) => {
     }
 }
 
+const getAmountOfPages = async (req,res) => {
+    try {
+        const count = await sign.count({
+            group: [fn('DATE', col('signDate'))]
+        })
+        const amount = count.length
+        return res.json({
+            amount
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 const getSignsOfService = async (req,res) => {
     try {
@@ -446,5 +459,5 @@ const getSignByDate = async (req,res) => {
 
 
 module.exports = {
-    getSignsSortedByDate, getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
+    getAmountOfPages,getSignsSortedByDate, getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
 }

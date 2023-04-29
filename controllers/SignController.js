@@ -1,7 +1,7 @@
 const {sign, EmployerModel, UserModel, medicineHistory, service} = require('../sequelize/models')
 const {validationResult} = require('express-validator')
 const isExist = require('../utils/isExist')
-const {Op, fn, col} = require('sequelize')
+const {Op, fn, col, literal} = require('sequelize')
 
 
 
@@ -53,7 +53,7 @@ const getSignsSortedByDate = async (req,res) => {
         const result = await sign.findAll({
             attributes: [
                 [fn('DATE', col('signDate')), 'signDate'], 
-                [fn('array_agg', fn('ROW', col('signDate'), col('user_id'))), 'user_ids']
+                [literal('array_agg(json_build_object(\'signDate\', signDate, \'user_id\', user_id) ORDER BY sign_date ASC)'), 'user_ids']
             ],
             group: [fn('DATE', col('signDate'))]
         })

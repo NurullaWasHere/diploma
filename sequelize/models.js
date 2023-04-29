@@ -66,6 +66,7 @@ const UserModel = sequelize.define('user', {
         allowNull: false,
         unique: true
     }
+
 })
 
 const BlogModel = sequelize.define('blog', {
@@ -197,6 +198,10 @@ const sign = sequelize.define('sign', {
     signDate: {
         type: DataTypes.DATE,
         allowNull: false
+    },
+    fullname: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 })
 

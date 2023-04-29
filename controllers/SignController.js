@@ -5,6 +5,33 @@ const {Op, fn, col, literal} = require('sequelize')
 
 
 
+const createSign = async (req,res) => {
+    try {
+        const signExist = await sign.findOne({
+            where: {
+                signDate: req.body.signDate
+            }
+        })
+        if(signExist){
+            return res.json({
+                message: "Sign already signed",
+                code:400
+            })
+        }
+        const newSign =  await sign.create({
+            ...req.body
+        })
+
+        return res.json({
+            message: "sign created!",
+            code: 200,
+            newSign
+        })
+    } catch (error) {
+        console.log(error)
+    }    
+}
+
 const createSignToService = async (req,res) => {
     try {
         const {service_id, signDate} = req.body;
@@ -467,5 +494,5 @@ const getSignByDate = async (req,res) => {
 
 
 module.exports = {
-    getAmountOfPages,getSignsSortedByDate, getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
+    createSign, getAmountOfPages,getSignsSortedByDate, getAllSignsEmployer,getEmptySignsOfService, getSignsOfService,signsByDoctor, deleteSign, signByPhone, signsByService, getEmptySignsOfEmployer, getSignsOfEmployer, signToExistingDate, createSignToDoctor, createSignToService
 }

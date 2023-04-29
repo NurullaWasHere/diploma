@@ -384,7 +384,7 @@ const signByPhone = async( req,res ) => {
 
 const deleteSign = async (req,res) => {
     try {
-        const {id} = req.body;
+        const {signDate} = req.body;
         if(!id) {
            return res.json({
                message: "id required", 
@@ -394,7 +394,7 @@ const deleteSign = async (req,res) => {
    
         const isExist = await sign.findOne({
             where: {
-                id
+                signDate
             }
         })
         if(!isExist){

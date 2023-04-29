@@ -204,12 +204,12 @@ const signToExistingDate = async (req,res) => {
             })
         }
         const user_id = req.user.id;
-        const fullname = user_id.firstname + " " + user.id.lastname
         const user = await UserModel.findOne({
             where: {
                 id: user_id
             }
         })
+        const fullname = user_id.firstname + " " + user.id.lastname
         const updated = await sign.update( {
             user_id,
             phone: user.phone,

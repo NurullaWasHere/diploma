@@ -236,7 +236,7 @@ const signToExistingDate = async (req,res) => {
                 id: user_id
             }
         })
-        const fullname = user_id.firstname + " " + user.id.lastname
+        const fullname = user.firstname + " " + user.lastname
         const updated = await sign.update( {
             user_id,
             phone: user.phone,

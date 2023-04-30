@@ -173,6 +173,52 @@ const paymentHistory = sequelize.define("historypay", {
 })
 
 
+const Ware = sequelize.define("Ware", {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement:true,
+        primaryKey: true
+    },
+    description:{
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    name:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
+})
+
+const Product = sequelize.define('Product', {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement:true,
+        primaryKey: true
+    },
+    serial_number:{
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    name:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    expiration_date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    created_date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    amount: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    }
+})
+
+
+
 const sign = sequelize.define('sign', {
     id: {
         type: DataTypes.INTEGER,
@@ -338,6 +384,8 @@ Certification.belongsTo(EmployerModel)
 EmployerModel.hasMany(review)
 review.belongsTo(EmployerModel)
 
+Ware.hasMany(Product)
+Product.belongsTo(Ware)
 
 module.exports = {
     UserModel,
@@ -351,5 +399,7 @@ module.exports = {
     questions,
     sign,
     Certification,
-    departmentModel
+    departmentModel,
+    Ware,
+    Product
 }

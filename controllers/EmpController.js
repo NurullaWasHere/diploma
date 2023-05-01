@@ -120,15 +120,13 @@ const getEmployer = async (req,res) => {
                 code:400
             })
         }
-        const empCertifications = await emp.getCertifications();
 
         return res.json({
-            emp,
-            empCertifications
+            emp
         })
     } catch (error) {
         res.json({
-            message:"Ошибка при getAllUsers",
+            message:"Ошибка при emp",
             error
         })
     }

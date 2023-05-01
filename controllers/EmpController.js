@@ -123,7 +123,7 @@ const getEmployer = async (req,res) => {
         const empCertifications = await emp.getCertifications();
 
         return res.json({
-            ...emp,
+            emp,
             empCertifications
         })
     } catch (error) {

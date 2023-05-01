@@ -7,7 +7,7 @@ const reviewRouter = require('./reviewRouter')
 const serviceRouter = require('./serviceRouter')
 const signRouter = require('./signRouter')
 const userRouter = require('./userRouter')
-const departmentRouter = require('./departmentRouter')
+const productRouter = require('../routes/productRouter')
 
 const api = new Router();
 
@@ -19,6 +19,7 @@ api.use('/review', reviewRouter)
 api.use('/service', serviceRouter)
 api.use('/sign', signRouter)
 api.use('/auth', userRouter)
+api.use('/product', productRouter)
 
 
 module.exports = api

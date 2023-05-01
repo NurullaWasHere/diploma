@@ -53,7 +53,7 @@ const createService  = async (req,res) => {
             })
         }
     
-        const newService = await BlogModel.create({
+        const newService = await service.create({
             ...params
         })
 

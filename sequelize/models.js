@@ -1,9 +1,6 @@
 const {DataTypes} = require('sequelize')
 const sequelize = require('./db')
 
-
-
-
 const departmentModel = sequelize.define('department', {
     id: {
         type: DataTypes.INTEGER,

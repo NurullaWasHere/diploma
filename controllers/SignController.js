@@ -165,6 +165,7 @@ const getEmptySignsOfService = async (req,res) => {
             ],
         })
         const signs = findSigns.filter( el => el.signDate.toLocaleDateString() == date)
+        console.log(signs)
         return res.json( {
             signs
         })

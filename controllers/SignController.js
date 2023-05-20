@@ -386,7 +386,7 @@ const signByPhone = async( req,res ) => {
 
 const deleteSign = async (req,res) => {
     try {
-        const {signDate} = req.body;
+        const {id} = req.body;
         if(!id) {
            return res.json({
                message: "id required", 

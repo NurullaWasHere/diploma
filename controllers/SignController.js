@@ -84,7 +84,7 @@ const getSignsSortedByDate = async (req,res) => {
         const result = await sign.findAll({
             attributes: [
                 [fn('DATE', col('signDate')), 'signDate'], 
-                [fn('array_agg', fn('json_build_object', 'signDate', literal(`("sign"."signDate" AT TIME ZONE 'UTC' AT TIME ZONE '${tzOffset}')`), 'user_id', col('user_id'), 'phone', col('phone'), 'fullname', col('fullname'))), 'user_ids']
+                [fn('array_agg', fn('json_build_object', 'signDate', literal(`("sign"."signDate" AT TIME ZONE 'UTC' AT TIME ZONE '${tzOffset}')`), 'user_id', col('user_id'), 'phone', col('phone'), 'fullname', col('fullname'), 'id', col('id'))), 'user_ids']
             ],
             group: [fn('DATE', col('signDate'))],
             order: [col('signDate')],

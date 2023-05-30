@@ -364,16 +364,17 @@ const signByPhone = async( req,res ) => {
                 phone
             }
         })
-        if(!isExist){
+        if(isExist){
            return res.json({
-               message: "sign doesn't exist", 
+               message: "sign exist", 
                code: 400
            })
         }   
 
         const newSign = await sign.create({
             phone, 
-            description
+            description,
+
         })
         return res.json({
             newSign
@@ -396,7 +397,7 @@ const deleteSign = async (req,res) => {
    
         const isExist = await sign.findOne({
             where: {
-                signDate
+                id
             }
         })
         if(!isExist){

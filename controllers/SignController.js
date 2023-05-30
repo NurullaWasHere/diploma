@@ -373,7 +373,7 @@ const signByPhone = async( req,res ) => {
 
         const newSign = await sign.create({
             phone, 
-            description,
+            name: description,
 
         })
         return res.json({

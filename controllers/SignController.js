@@ -374,6 +374,7 @@ const signByPhone = async( req,res ) => {
         const newSign = await sign.create({
             phone, 
             name: description,
+            signDate: '2023-06-06:00:00:00'
 
         })
         return res.json({

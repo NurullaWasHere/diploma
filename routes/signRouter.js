@@ -24,7 +24,7 @@ router.post('/createSignToService', createSignToService)
 
 router.post('/signByPhone', signByPhone)
 
-router.delete('/deleteSign', deleteSign)
+router.post('/deleteSign', deleteSign)
 
 
 module.exports = router
